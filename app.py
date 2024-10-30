@@ -15,7 +15,12 @@ conn = psycopg2.connect(
 cur = conn.cursor()
 
 cur.execute('DROP TABLE IF EXISTS tasks')
-cur.execute('CREATE TABLE tasks(task_id serial PRIMARY KEY, description character varying NULL, created_at timestamp NOT NULL, completed_at timestamp NULL)')
+cur.execute('CREATE TABLE tasks(task_id serial PRIMARY KEY,'
+            'status boolean NOT NULL DEFAULT FALSE,'
+            'description character varying NULL,'
+            'created_at timestamp NOT NULL,'
+            'completed_at timestamp NULL);'
+            'INSERT INTO tasks(description, created_at) VALUES (%s, %s);', ('test', '2000-01-01'))
 conn.commit()
 
 cur.close()
@@ -30,8 +35,13 @@ def get_db_connection():
 
 @app.route('/')
 def home():
-    return render_template('home.html')
-
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM tasks')
+    tasks = cur.fetchall()
+    cur.close()
+    conn.close()
+    return render_template('home.html', tasks=tasks)
 
 if __name__ == '__main__':
     app.run()

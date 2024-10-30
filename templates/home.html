@@ -22,7 +22,11 @@
 
         <div class="tasks-list">
             <ul>
-
+                {% for task in tasks %}
+                    <li>
+                        {{ task[2] }}
+                    </li>
+                {% endfor %}
             </ul>
         </div>
     </div>
