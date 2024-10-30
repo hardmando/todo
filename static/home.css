@@ -1,0 +1,52 @@
+.bodywrapper{
+    margin: 0 20%;
+    background: #cec3be;
+    align-content: center;
+}
+h1{
+    text-align: center;
+    font-size: 50px;
+}
+.add-task-button{
+    background: #95a19f;
+    margin: 40px 37%;
+    padding: 20px 40px;
+    width: 300px;
+    font-size: 20px;
+    border: none;
+    border-radius: 40px;
+}
+button:active{
+    background: #698385;
+}
+.tasks-list{
+    background: #d4ccc6;
+    padding: 50px;
+    margin: 5% 30%;
+    border-radius: 40px;
+}
+
+#add-task-form{
+    background: #e5dcd8;
+    width: 400px;
+    height: 200px;
+    margin: 10% 20%;
+    border-radius: 40px;
+    position: absolute;
+    box-shadow: 1px 1px 500px black;
+}
+.popup-task-button{
+    background: #95a19f;
+    padding: 10px 30px;
+    width: 200px;
+    font-size: 16px;
+    border: none;
+    border-radius: 40px;
+    margin: 10px;
+}
+.add-task-form{
+    padding: 20px;
+}
+input{
+
+}

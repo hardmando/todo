@@ -2,9 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Tasks</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
 </head>
 <body>
+    <div class="bodywrapper">
+        <h1>Tasks</h1>
+        <button class="add-task-button" onclick="show_add_task_form()">Add Task</button>
 
+        <div id="add-task-form" hidden>
+            <form class="add-task-form">
+                <label>Task Name
+                    <input/>
+                </label>
+                <button type="submit" class='popup-task-button' onclick="hide_add_task_form()">Submit</button>
+                <button type="reset" class='popup-task-button' onclick="hide_add_task_form()">Cancel</button>
+            </form>
+        </div>
+
+        <div class="tasks-list">
+            <ul>
+
+            </ul>
+        </div>
+    </div>
+
+<script type="text/javascript">
+    function show_add_task_form(){
+        document.getElementById('add-task-form').removeAttribute('hidden');
+    }
+    function hide_add_task_form(){
+        document.getElementById('add-task-form').setAttribute('hidden', 'hidden')
+    }
+</script>
 </body>
 </html>

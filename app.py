@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 import psycopg2
 
 app = Flask(__name__)
@@ -21,9 +21,16 @@ conn.commit()
 cur.close()
 conn.close()
 
+def get_db_connection():
+    conn = psycopg2.connect(host='localhost',
+                            database='postgres',
+                            user='admin',
+                            password='admin')
+    return conn
+
 @app.route('/')
-def home():  # put application's code here
-    return ()
+def home():
+    return render_template('home.html')
 
 
 if __name__ == '__main__':
