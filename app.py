@@ -20,7 +20,9 @@ cur.execute('CREATE TABLE tasks(task_id serial PRIMARY KEY,'
             'description character varying NULL,'
             'created_at timestamp NOT NULL,'
             'completed_at timestamp NULL);'
-            'INSERT INTO tasks(description, created_at) VALUES (%s, %s);', ('test', '2000-01-01'))
+            'INSERT INTO tasks(description, created_at) VALUES (%s, %s);',
+            ('test0', '2000-01-01'))
+cur.execute('INSERT INTO tasks (description, created_at) VALUES (%s, %s);', ('test1', '2000-01-01'))
 conn.commit()
 
 cur.close()

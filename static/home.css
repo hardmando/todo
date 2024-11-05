@@ -50,3 +50,12 @@ button:active{
 input{
 
 }
+.task{
+    display: flex;
+    background: #698385;
+    border-radius: 40px;
+    padding: 40px;
+}
+.task-name{
+    font-size: 20px;
+}

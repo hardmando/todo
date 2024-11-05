@@ -23,8 +23,13 @@
         <div class="tasks-list">
             <ul>
                 {% for task in tasks %}
-                    <li>
-                        {{ task[2] }}
+                    <li class="task">
+                        <div>
+                            <p class="task-name">{{ task[2] }}</p>
+                            <p class="task-added-date">{{ task[3] }}</p>
+                            <p class="task-completion-date">{{ task[4] }}</p>
+                        </div>
+
                     </li>
                 {% endfor %}
             </ul>
