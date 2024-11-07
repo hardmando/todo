@@ -11,11 +11,11 @@
         <button class="add-task-button" onclick="show_add_task_form()">Add Task</button>
 
         <div id="add-task-form" hidden>
-            <form class="add-task-form">
+            <form class="add-task-form" action="/post_task" method="post">
                 <label>Task Name
-                    <input/>
+                    <input name="task_desc"/>
                 </label>
-                <button type="submit" class='popup-task-button' onclick="hide_add_task_form()">Submit</button>
+                <input type="submit" class='popup-task-button' value="Sumbit" onclick="hide_add_task_form()"/>
                 <button type="reset" class='popup-task-button' onclick="hide_add_task_form()">Cancel</button>
             </form>
         </div>
@@ -28,6 +28,10 @@
                             <p class="task-name">{{ task[2] }}</p>
                             <p class="task-added-date">{{ task[3] }}</p>
                             <p class="task-completion-date">{{ task[4] }}</p>
+                            <form method="post" action="/drop_task">
+                                <input value="remove" type="submit"  name="drop_task"/>
+                                <input hidden name="task_id" value='{{ task[0] }}' />
+                            </form>
                         </div>
 
                     </li>
