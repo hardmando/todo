@@ -29,11 +29,14 @@
                             <p class="task-added-date">{{ task[3] }}</p>
                             <p class="task-completion-date">{{ task[4] }}</p>
                             <form method="post" action="/drop_task">
-                                <input value="remove" type="submit"  name="drop_task"/>
+                                <input value="Remove" type="submit"  name="drop_task"/>
+                                <input hidden name="task_id" value='{{ task[0] }}' />
+                            </form>
+                            <form method="post" action="/check_task">
+                                <input type="submit" value="Done"/>
                                 <input hidden name="task_id" value='{{ task[0] }}' />
                             </form>
                         </div>
-
                     </li>
                 {% endfor %}
             </ul>

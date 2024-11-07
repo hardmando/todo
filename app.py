@@ -20,11 +20,11 @@ cur = conn.cursor()
 
 cur.execute('DROP TABLE IF EXISTS tasks')
 cur.execute('CREATE TABLE tasks(task_id serial PRIMARY KEY,'
-            'status boolean NOT NULL DEFAULT FALSE,'
+            'status boolean DEFAULT FALSE,'
             'description character varying NULL,'
             'created_at timestamp NOT NULL,'
-            'completed_at timestamp NULL);'
-            'INSERT INTO tasks(description, created_at) VALUES (%s, %s);',
+            'completed_at timestamp );'
+            'INSERT INTO tasks (description, created_at) VALUES (%s, %s);',
             ('test0', '2000-01-01'))
 cur.execute('INSERT INTO tasks (description, created_at) VALUES (%s, %s);', ('test1', '2000-01-01'))
 conn.commit()
@@ -44,7 +44,7 @@ def get_db_connection():
 def home():
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute('SELECT * FROM tasks')
+    cur.execute('SELECT * FROM tasks ORDER BY created_at')
     tasks = cur.fetchall()
     cur.close()
     conn.close()
@@ -72,7 +72,21 @@ def drop_task():
     cur.execute('DELETE FROM tasks WHERE task_id = %s;', (task_id,))
     conn.commit()
 
-    cur.execute('SELECT * FROM tasks')
+    cur.execute('SELECT * FROM tasks ORDER BY created_at;')
+    tasks = cur.fetchall()
+    cur.close()
+    conn.close()
+    return render_template('home.html', tasks=tasks)
+
+@app.route('/check_task', methods=['GET', 'POST'])
+def check_task():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    task_id = request.form['task_id']
+    cur.execute('UPDATE tasks SET status = %s, completed_at = %s WHERE task_id = %s;', (True, datetime.datetime.now(), task_id,))
+    conn.commit()
+
+    cur.execute('SELECT * FROM tasks ORDER BY created_at;')
     tasks = cur.fetchall()
     cur.close()
     conn.close()
